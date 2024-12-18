@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number to Roman Numeral Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    <header><a href="index.html">Back to Home</a></header>
+    <div class="container">
+        <h1>Number to Roman Numeral Converter</h1>
+        <input type="number" id="numberInput" placeholder="Enter a number (1-3999)" min="1" max="3999">
+        <button onclick="convertToRoman()">Convert</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function convertToRoman() {
+            const num = document.getElementById('numberInput').value;
+            const resultDiv = document.getElementById('result');
+
+            if (num < 1 || num > 3999 || isNaN(num)) {
+                resultDiv.textContent = "Please enter a number between 1 and 3999.";
+                return;
+            }
+
+            const romanNumerals = [
+                { value: 1000, numeral: 'M' },
+                { value: 900, numeral: 'CM' },
+                { value: 500, numeral: 'D' },
+                { value: 400, numeral: 'CD' },
+                { value: 100, numeral: 'C' },
+                { value: 90, numeral: 'XC' },
+                { value: 50, numeral: 'L' },
+                { value: 40, numeral: 'XL' },
+                { value: 10, numeral: 'X' },
+                { value: 9, numeral: 'IX' },
+                { value: 5, numeral: 'V' },
+                { value: 4, numeral: 'IV' },
+                { value: 1, numeral: 'I' }
+            ];
+
+            let roman = '';
+            let number = parseInt(num);
+
+            romanNumerals.forEach(({ value, numeral }) => {
+                while (number >= value) {
+                    roman += numeral;
+                    number -= value;
+                }
+            });
+
+            resultDiv.textContent = `Roman Numeral: ${roman}`;
+        }
+    </script>
+</body>
+</html>
